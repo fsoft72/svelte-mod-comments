@@ -24,7 +24,7 @@ import { get, patch, post, delete_, type LiWEFetcherOptions } from '$liwe3/utils
  * @param text - Comment text content [req]
  * @param visible - Comment visibility [opt]
  *
- * @return comment: Comment
+ * @return comment: CommentType
  *
  */
 export const comments_add = async ( module: string, id_obj: string, text: string, visible?: boolean, _options?: LiWEFetcherOptions ) => {
@@ -72,7 +72,7 @@ export const comments_delete = async ( id: string, _options?: LiWEFetcherOptions
 /**
  * @param module - comments module related [opt]
  *
- * @return comments: Comment
+ * @return comments: CommentType
  *
  */
 export const comments_admin_list = async ( module?: string, _options?: LiWEFetcherOptions ) => {

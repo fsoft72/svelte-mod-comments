@@ -5,8 +5,8 @@
 
 /*=== f2c_end __file ===*/
 
-/** Comment */
-export interface Comment {
+/** CommentType */
+export interface CommentType {
 	/** Unique comment identifier */
 	id: string;
 	/** Domain identifier */
