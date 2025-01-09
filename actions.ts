@@ -94,7 +94,7 @@ export const comments_admin_list = async ( module?: string, _options?: LiWEFetch
  *
  */
 export const comments_admin_del = async ( id: string, _options?: LiWEFetcherOptions ) => {
-	const res = await delete_( `/apicomments/admin/del`, { id }, _options?.skipError ? _options.skipError : false );
+	const res = await delete_( `/api/comments/admin/del`, { id }, _options?.skipError ? _options.skipError : false );
 
 	if (res.error) return res;
 

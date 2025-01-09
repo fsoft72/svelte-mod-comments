@@ -4,17 +4,15 @@
     import Spinner from '$liwe3/components/Spinner.svelte';
 
     import { comments_admin_list, comments_admin_del } from '$modules/comments/actions';
-    import { short_text } from '$liwe3/utils/utils';
     import { onMount } from 'svelte';
 
     import { storePLANETUser } from '$modules/planet/store.svelte';
 
-    import { Pencil, Trash, Plus, ArrowLeft} from 'svelte-hero-icons';
+    import { Trash, ArrowLeft} from 'svelte-hero-icons';
 
     import type { DataGridAction, DataGridField, DataGridRow } from '$liwe3/components/DataGrid.svelte'
-	import type { Comment } from '$modules/comments/types';
+	import type { CommentType } from '$modules/comments/types';
     import type { PaginatorButtons } from '$liwe3/components/Paginator.svelte';
-    import type { Color } from '$liwe3/types/types';
 	import Button from '$liwe3/components/Button.svelte';
 
 
@@ -26,9 +24,8 @@
     let { uid, module }: Props = $props();
 
     let isReady:boolean = $state(false);
-    let showForm:boolean = $state(false);
     let showConfirm:boolean = $state(false);
-    let comments:Comment[] = $state([]);
+    let comments:CommentType[] = $state([]);
     let id:string = $state('');
 
     const authorFullName = ( name:string, row:DataGridRow ) => {
@@ -38,10 +35,10 @@
 
     const gridFields: DataGridField[] = [
         { name: 'id', label: 'ID', type: 'text', hidden: true },
-        { name: 'id_obj', label: 'ID', type: 'text' },
+        { name: 'id_obj', label: 'ID', type: 'text', hidden: true },
         { name: 'module', label: 'Module', type: 'text', filterable: true },
         { name: 'id_user', label: 'Author', type: 'text', render: authorFullName, filterable: true },
-        { name: 'text', label: 'Comment', type: 'text', render: (value:string) => short_text(value, 20) },
+        { name: 'text', label: 'Comment', type: 'text'}, //, render: (value:string) => short_text(value, 20) },
         { name: 'visible', label: 'Visible', type: 'checkbox' },
     ];
 
@@ -65,8 +62,8 @@
         const res = await comments_admin_del(id);
         if (res) {
             await refreshComments();
-            showConfirm = false;
         }
+        showConfirm = false;
     };
 
     const refreshComments = async () => {
